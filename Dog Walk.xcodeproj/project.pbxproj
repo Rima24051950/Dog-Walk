@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FA5212DC2F44717100B3C559 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5212DB2F44716C00B3C559 /* OnboardingView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		FA5212DB2F44716C00B3C559 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		FA54ACA22F444E32004A7168 /* Dog Walk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dog Walk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,6 +37,7 @@
 		FA54AC992F444E32004A7168 = {
 			isa = PBXGroup;
 			children = (
+				FA5212DB2F44716C00B3C559 /* OnboardingView.swift */,
 				FA54ACA42F444E32004A7168 /* Dog Walk */,
 				FA54ACA32F444E32004A7168 /* Products */,
 			);
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5212DC2F44717100B3C559 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@ import SwiftUI
 struct Dog_WalkApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
         }
     }
 }
