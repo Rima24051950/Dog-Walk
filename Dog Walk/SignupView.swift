@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-// MARK: - 🔹 Компонент кнопки социальной сети
+// MARK: -  Компонент кнопки социальной сети
 struct SocialLoginButton: View {
     let icon: Image
     let title: String
@@ -13,7 +13,7 @@ struct SocialLoginButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 12) {
-                // 🔹 Иконка с констрайнтами: width: 24; height: 24; opacity: 1
+                //  Иконка с констрайнтами: width: 24; height: 24; opacity: 1
                 icon
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -36,7 +36,7 @@ struct SocialLoginButton: View {
     }
 }
 
-// MARK: - 🔹 Компонент стилизованного TextField
+// MARK: -  Компонент стилизованного TextField
 struct StyledTextField: View {
     let placeholder: String
     let icon: String?
@@ -81,7 +81,7 @@ struct StyledTextField: View {
     }
 }
 
-// MARK: - 🔹 Расширение для шрифта с fallback
+// MARK: - Расширение для шрифта с fallback
 extension Font {
     static func poppinsMedium(size: CGFloat) -> Font {
         UIFont(name: "Poppins-Medium", size: size) != nil
@@ -90,7 +90,7 @@ extension Font {
     }
 }
 
-// MARK: - 🔹 Основной экран
+// MARK: -  Основной экран
 struct SignupView: View {
     @Environment(\.dismiss) var dismiss
     @State private var name: String = ""
@@ -237,7 +237,7 @@ struct SignupView: View {
         } // ✅ Закрываем ScrollView
         .background(Color.white)
     } // ✅ Закрываем body
-} // ✅ Закрываем SignupView
+} 
 
 #Preview {
     SignupView()
