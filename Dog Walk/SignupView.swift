@@ -13,15 +13,15 @@ struct SocialLoginButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 12) {
-                //  Иконка с констрайнтами: width: 24; height: 24; opacity: 1
+                
                 icon
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)   // ✅ width: 24; height: 24
-                    .rotationEffect(.degrees(0))     // ✅ angle: 0 deg
-                    .opacity(1)                      // ✅ opacity: 1
-                    .padding(.leading, iconLeadingPadding) // ✅ left: 21px
-                    .padding(.vertical, 18)          // ✅ Центрирование по Y (60-24)/2 = 18
+                    .frame(width: 24, height: 24)
+                    .rotationEffect(.degrees(0))
+                    .opacity(1)
+                    .padding(.leading, iconLeadingPadding)
+                    .padding(.vertical, 18)          
                     .foregroundColor(fgColor)
                 
                 Text(title)

@@ -15,6 +15,7 @@ struct OnboardingPage: Identifiable {
 
 // 🎬 Главный View
 struct OnboardingView: View {
+    @State private var showSignIn = false
     @State private var showSignup = false
     @State private var currentPage = 0
     
@@ -47,6 +48,7 @@ struct OnboardingView: View {
             )
             .ignoresSafeArea()
             
+                    
             // 🔴 Логотип
             LogoView()
             
@@ -70,17 +72,21 @@ struct OnboardingView: View {
                     }
                 },
                 onSignIn: {
-                    showSignup = true
+                    showSignIn = true
                 }
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .offset(x: 21, y: 515)
         }
         .fullScreenCover(isPresented: $showSignup) {
-            SignupView()
+                    SignupView()  // ← Регистрация
+                }
+                .fullScreenCover(isPresented: $showSignIn) {
+                    SignInView()  // ← Экран "Вход только после регистрации"
+                }
         }
     }
-}
+
 
 // 🔴 LogoView
 struct LogoView: View {
@@ -148,6 +154,7 @@ struct ContentStack: View {
     let onPageSelected: (Int) -> Void
     let onNext: () -> Void
     let onSignIn: () -> Void
+   // let onSignUp: () -> Void
     
     var body: some View {
         VStack(spacing: 22) {
