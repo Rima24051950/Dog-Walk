@@ -11,6 +11,7 @@ struct SocialLoginButton: View {
     var action: () -> Void
     
     var body: some View {
+        
         Button(action: action) {
             HStack(spacing: 12) {
                 
@@ -34,6 +35,7 @@ struct SocialLoginButton: View {
         }
         .buttonStyle(.plain)
     }
+    
 }
 
 // MARK: -  Компонент стилизованного TextField
@@ -97,6 +99,7 @@ struct SignupView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isAgreed: Bool = false
+    @State private var showTabBar = false
     
     // 🔹 AttributedString для кликабельных ссылок в тексте
     private var footerText: AttributedString {
@@ -123,121 +126,157 @@ struct SignupView: View {
         return result
     }
     
+    
+    
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 22) {
-                
-                // 🔹 Кнопка "Назад"
-                Button(action: { dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 28))
-                        .foregroundColor(.black)
-                }
-                
-                // 🔹 Заголовок
-                VStack(spacing: 8) {
-                    Text("Let's start here")
-                        .font(.system(size: 34, weight: .bold))
-                        .frame(width: 264, height: 51)
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 22) {
                     
-                    Text("Fill in your details to begin")
-                        .font(.system(size: 17, weight: .medium))
-                        .multilineTextAlignment(.center)
+                    // 🔹 Кнопка "Назад"
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 28))
+                            .foregroundColor(.black)
+                        
+                    }
+                    .toolbar {
+                               ToolbarItem(placement: .topBarTrailing) {
+                                   Button(action: {
+                                       showTabBar = true  // ← Переход на TabBar
+                                   }) {
+                                       Text("далее")
+                                           .font(.system(size: 15, weight: .semibold))
+                                           .foregroundColor(.black)
+                                           .padding(.horizontal,8)
+                                           .padding(.vertical, 8)
+                                           .background(Color.green)
+                                           .cornerRadius(8)
+                                   }
+                               }
+                           }
+                    .fullScreenCover(isPresented: $showTabBar) {
+                        MainTabBarView()
+                    }
+                    
+                    
+                    // 🔹 Заголовок
+                    VStack(spacing: 8) {
+                        Text("Let's start here")
+                            .font(.system(size: 34, weight: .bold))
+                            .frame(width: 264, height: 51)
+                        
+                        Text("Fill in your details to begin")
+                            .font(.system(size: 17, weight: .medium))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(width: 264, height: 77)
+                    
+                    // 🔹 Поля ввода
+                    VStack(spacing: 22) {
+                        StyledTextField(placeholder: "Name", icon: "person", text: $name, autocapitalization: .words)
+                        StyledTextField(placeholder: "Email", icon: "envelope", text: $email, keyboardType: .emailAddress, autocapitalization: .none)
+                        StyledTextField(placeholder: "Password", icon: "lock", text: $password, isSecure: true)
+                    }
+                    
+                    // 🔹 Кнопка Sign Up
+                    Button(action: {
+                        // Регистрация
+                    }) {
+                        Text("Sign Up")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundColor(.white)
+                            .frame(width: 343, height: 60)
+                            .background(Color.orange)
+                            .cornerRadius(14)
+                    }
+                    
+                    // 🔹 Стэк: divider + соц. кнопки (gap: 10px)
+                    VStack(spacing: 10) {
+                        
+                        // Divider "or"
+                        HStack(spacing: 12) {
+                            Rectangle().frame(height: 1).foregroundColor(.secondary.opacity(0.3))
+                            Text("or").font(.system(size: 14, weight: .medium)).foregroundColor(.secondary)
+                            Rectangle().frame(height: 1).foregroundColor(.secondary.opacity(0.3))
+                        }
+                        .padding(.vertical, 4)
+                        
+                        // 🔹 Кнопка Facebook (иконка: 24×24, left: 21px)
+                        SocialLoginButton(
+                            icon: Image("facebook-icon"),  // ✅ Добавить в Assets.xcassets
+                            title: "Connect with Facebook",
+                            bgColor: Color(red: 0.12, green: 0.47, blue: 0.96),
+                            fgColor: .white,
+                            iconLeadingPadding: 21         // ✅ left: 21px
+                        ) {
+                            print("Facebook login tapped")
+                        }
+                        
+                        // 🔹 Кнопка Google (иконка: 24×24, left: 21px)
+                        SocialLoginButton(
+                            icon: Image("google-icon"),    // ✅ Добавить в Assets.xcassets
+                            title: "Connect with Google",
+                            bgColor: .white,
+                            fgColor: .black,
+                            iconLeadingPadding: 21         // ✅ left: 21px
+                        ) {
+                            print("Google login tapped")
+                        }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
+                        )
+                        
+                    }
+                    .frame(width: 343)
+                    .padding(.top, 8)
+                    
+                    // 🔹 Footer текст с кликабельными ссылками
+                    Text(footerText)
+                        .font(.poppinsMedium(size: 13))
                         .foregroundColor(.secondary)
-                }
-                .frame(width: 264, height: 77)
-                
-                // 🔹 Поля ввода
-                VStack(spacing: 22) {
-                    StyledTextField(placeholder: "Name", icon: "person", text: $name, autocapitalization: .words)
-                    StyledTextField(placeholder: "Email", icon: "envelope", text: $email, keyboardType: .emailAddress, autocapitalization: .none)
-                    StyledTextField(placeholder: "Password", icon: "lock", text: $password, isSecure: true)
-                }
-                
-                // 🔹 Кнопка Sign Up
-                Button(action: {
-                    // Регистрация
-                }) {
-                    Text("Sign Up")
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundColor(.white)
-                        .frame(width: 343, height: 60)
-                        .background(Color.orange)
-                        .cornerRadius(14)
-                }
-                
-                // 🔹 Стэк: divider + соц. кнопки (gap: 10px)
-                VStack(spacing: 10) {
-                    
-                    // Divider "or"
-                    HStack(spacing: 12) {
-                        Rectangle().frame(height: 1).foregroundColor(.secondary.opacity(0.3))
-                        Text("or").font(.system(size: 14, weight: .medium)).foregroundColor(.secondary)
-                        Rectangle().frame(height: 1).foregroundColor(.secondary.opacity(0.3))
-                    }
-                    .padding(.vertical, 4)
-                    
-                    // 🔹 Кнопка Facebook (иконка: 24×24, left: 21px)
-                    SocialLoginButton(
-                        icon: Image("facebook-icon"),  // ✅ Добавить в Assets.xcassets
-                        title: "Connect with Facebook",
-                        bgColor: Color(red: 0.12, green: 0.47, blue: 0.96),
-                        fgColor: .white,
-                        iconLeadingPadding: 21         // ✅ left: 21px
-                    ) {
-                        print("Facebook login tapped")
-                    }
-                    
-                    // 🔹 Кнопка Google (иконка: 24×24, left: 21px)
-                    SocialLoginButton(
-                        icon: Image("google-icon"),    // ✅ Добавить в Assets.xcassets
-                        title: "Connect with Google",
-                        bgColor: .white,
-                        fgColor: .black,
-                        iconLeadingPadding: 21         // ✅ left: 21px
-                    ) {
-                        print("Google login tapped")
-                    }
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 14)
-                            .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-                    )
-                    
-                }
-                .frame(width: 343)
-                .padding(.top, 8)
-                
-                // 🔹 Footer текст с кликабельными ссылками
-                Text(footerText)
-                    .font(.poppinsMedium(size: 13))
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)   // ✅ Центрирование multiline
-                    .kerning(-0.05)                    // ✅ letter-spacing: -0.41%
-                    .padding(.top, 16)
-                    .frame(maxWidth: 329)              // ✅ maxWidth: 329
-                    .frame(maxWidth: .infinity, alignment: .center) // ✅ Центрируем контейнер
-                    .padding(.horizontal, 16)          // ✅ Отступы для адаптивности
-                    .onOpenURL { url in                // ✅ Обработка кликов по ссылкам
-                        if url.scheme == "app" {
-                            if url.host == "terms" {
-                                print("Terms of Use tapped")
-                                // Открыть экран Terms
-                            } else if url.host == "privacy" {
-                                print("Privacy Policy tapped")
-                                // Открыть экран Privacy
+                        .multilineTextAlignment(.center)   // ✅ Центрирование multiline
+                        .kerning(-0.05)                    // ✅ letter-spacing: -0.41%
+                        .padding(.top, 16)
+                        .frame(maxWidth: 329)              // ✅ maxWidth: 329
+                        .frame(maxWidth: .infinity, alignment: .center) // ✅ Центрируем контейнер
+                        .padding(.horizontal, 16)          // ✅ Отступы для адаптивности
+                        .onOpenURL { url in                // ✅ Обработка кликов по ссылкам
+                            if url.scheme == "app" {
+                                if url.host == "terms" {
+                                    print("Terms of Use tapped")
+                                    // Открыть экран Terms
+                                } else if url.host == "privacy" {
+                                    print("Privacy Policy tapped")
+                                    // Открыть экран Privacy
+                                }
                             }
                         }
-                    }
-                
-            } // ✅ Закрываем главный VStack
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 16)
-            .padding(.top, 45)
-            .padding(.bottom, 30)
-        } // ✅ Закрываем ScrollView
-        .background(Color.white)
+                    
+                } // ✅ Закрываем главный VStack
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 16)
+                .padding(.top, 45)
+                .padding(.bottom, 30)
+            } // ✅ Закрываем ScrollView
+            .background(Color.white)
+            
+            
+        }
+        
+        // Твой основной контент
+        
+        
+        
     } // ✅ Закрываем body
-} 
+    
+    
+}
+
+                
+
 
 #Preview {
     SignupView()
