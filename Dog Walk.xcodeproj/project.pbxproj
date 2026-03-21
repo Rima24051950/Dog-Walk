@@ -8,11 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		FA5212DC2F44717100B3C559 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5212DB2F44716C00B3C559 /* OnboardingView.swift */; };
+		FA7BE6E52F66F40D0066DD8A /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7BE6E42F66F3F00066DD8A /* SignInView.swift */; };
+		FA7BE7032F695C620066DD8A /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7BE7022F695C5E0066DD8A /* MainTabBarView.swift */; };
+		FA7BE7062F6982C40066DD8A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7BE7052F6982B00066DD8A /* HomeView.swift */; };
+		FAE318AF2F6ADFCC00833097 /* MomentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE318AE2F6ADFBE00833097 /* MomentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FA5212DB2F44716C00B3C559 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		FA54ACA22F444E32004A7168 /* Dog Walk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dog Walk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA7BE6E42F66F3F00066DD8A /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		FA7BE7022F695C5E0066DD8A /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
+		FA7BE7052F6982B00066DD8A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FAE318AE2F6ADFBE00833097 /* MomentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -37,6 +45,8 @@
 		FA54AC992F444E32004A7168 = {
 			isa = PBXGroup;
 			children = (
+				FA7BE7042F69827F0066DD8A /* TabBarGroup */,
+				FA7BE6E42F66F3F00066DD8A /* SignInView.swift */,
 				FA5212DB2F44716C00B3C559 /* OnboardingView.swift */,
 				FA54ACA42F444E32004A7168 /* Dog Walk */,
 				FA54ACA32F444E32004A7168 /* Products */,
@@ -49,6 +59,16 @@
 				FA54ACA22F444E32004A7168 /* Dog Walk.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FA7BE7042F69827F0066DD8A /* TabBarGroup */ = {
+			isa = PBXGroup;
+			children = (
+				FAE318AE2F6ADFBE00833097 /* MomentsView.swift */,
+				FA7BE7052F6982B00066DD8A /* HomeView.swift */,
+				FA7BE7022F695C5E0066DD8A /* MainTabBarView.swift */,
+			);
+			path = TabBarGroup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +146,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5212DC2F44717100B3C559 /* OnboardingView.swift in Sources */,
+				FAE318AF2F6ADFCC00833097 /* MomentsView.swift in Sources */,
+				FA7BE7062F6982C40066DD8A /* HomeView.swift in Sources */,
+				FA7BE7032F695C620066DD8A /* MainTabBarView.swift in Sources */,
+				FA7BE6E52F66F40D0066DD8A /* SignInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
